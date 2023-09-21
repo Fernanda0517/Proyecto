@@ -11,26 +11,43 @@
     <h1>Listado de Productos</h1>
     <table>
         <tr>
-            <th>ID</th>
             <th>Nombre</th>
             <th>Código de Barras</th>
             <th>Precio</th>
             <th>Fecha de Caducidad</th>
             <th>Cantidad en Inventario</th>
             <th>Tipo de Producto</th>
+            <th>Modificar - Eliminar</th>
         </tr>
         {% for producto in productos %}
             <tr>
-                <td>{{ producto.id }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.codigo_barras }}</td>
                 <td>{{ producto.precio }}</td>
                 <td>{{ producto.fecha_caducidad }}</td>
                 <td>{{ producto.cantidad_inventario }}</td>
                 <td>{{ producto.tipo.nombre }}</td>
+                <td>
+                    <form id="eliminarForm" method="POST" action="{% url 'eliminar_producto' producto.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="producto_id" value="{{ producto.id }}">
+                        <a href="{% url 'modificar_producto' producto.id %}">✎</a>
+                        <a href="#" onclick="eliminarProducto(event)">🗑</a>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
+
+    <script>
+        function eliminarProducto(event) {
+            event.preventDefault();
+            let confirmacion = confirm("¿Estás seguro de que deseas eliminar este producto?");
+            if (confirmacion) {
+                document.getElementById('eliminarForm').submit();
+            }
+        }
+    </script>
 </body>
 </html>
 {% endblock content %}

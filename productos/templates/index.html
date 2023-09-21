@@ -5,31 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
     <title>Farmacia</title>
 </head>
 <body>
-    
     <div id="navegador">
-        <img src="{% static 'images/Logo.png'%}" alt="Logo">
-        <nav>
-            <ul>
-                <li>
-                    <a id="texto" href="{% url 'listar_productos' %}">Listas Productos</a>
-                </li>
-                <li>
-                    <a id="texto" href="{% url 'registrar_producto' %}">Registrar Productos</a>
-                </li>
-                <li>
-                    <a id="texto" href="{% url 'agregar_tipo_producto' %}">Agregar Tipos</a>
-                </li>
-                <li>
-                    <a id="texto" href="{% url 'mostrar_tipos_productos' %}">Mostrar Tipos</a>
-                </li> 
-            </ul>
-        </nav>
-    </div>
-
+    <img src="{% static 'images/Logo.png'%}" alt="Logo">
+    <nav>
+        <ul>
+            <li>
+                <a id="texto" href="#">Tipos</a>
+                <ul>
+                    <li>
+                        <a id="texto" href="{% url 'agregar_tipo_producto' %}">Agregar </a>
+                    </li>
+                    <li>
+                        <a id="texto" href="{% url 'mostrar_tipos_productos' %}">Mostrar </a>
+                    </li> 
+                </ul>
+            </li>
+            <li>
+                <a id="texto" href="#">Productos</a>
+                <ul>
+                    <li>
+                        <a id="texto" href="{% url 'listar_productos' %}">Listas </a>
+                    </li>
+                    <li>
+                        <a id="texto" href="{% url 'registrar_producto' %}">Registrar </a>
+                    </li>
+                </ul>
+            </li> 
+        </ul>
+    </nav>
+</div>
+<br>
+<br>
+<form action="{% url 'buscar_productos' %}" method="get">
+    <input type="text" name="consulta" placeholder="Buscar Productos">
+    <button type="submit">Buscar</button>
+</form>
 {% block content %}
 
 {%endblock%}
